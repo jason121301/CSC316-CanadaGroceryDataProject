@@ -4,13 +4,15 @@
 
 // init global variables, switches, helper functions
 let myPieChart,
-    myMapVis;
+    myMapVis,
+    myDotChart; 
 
+let processedData;
 
 function loadData() {
     Promise.all([
-        d3.csv("grocery_types.csv"),
-        d3.csv("prices.csv")
+        d3.csv("data/dataMapping.csv"),
+        d3.csv("data/groceryData.csv")
     ]).then(([groceryData, priceData]) => {
         // Create a mapping of product to grocery type, ratio to 100 gram, and unit
         const groceryMap = {};
@@ -23,7 +25,7 @@ function loadData() {
         });
 
         // Process price data
-        const processedData = priceData.map(d => {
+        processedData = priceData.map(d => {
             const groceryInfo = groceryMap[d.Products] || {
                 groceryType: "Unknown",
                 ratioTo100Gram: 1,
@@ -39,7 +41,7 @@ function loadData() {
                 region: d.GEO
             };
         });
-
+        initMainPage(processedData)
         console.log("Data Loaded:", processedData); // Debugging output
     }).catch(error => {
         console.error("Error loading data:", error);
@@ -53,15 +55,10 @@ loadData();
 
 
 // initMainPage
-function initMainPage(allDataArray) {
+function initMainPage(processedData) {
 
     // log data
     // console.log(allDataArray);
-
-    // activity 1, pie chart
-    myPieChart = new PieChart('pieDivRight')
-
-    // activity 2, force layout
-    myMapVis = new MapVis('mapDiv', allDataArray[0], allDataArray[1])
+    myDotChart = new DotChart('dotChart', processedData);
 
 }
