@@ -1,8 +1,10 @@
 .tooltip {
     position: absolute;
-    text-align: center;
-    font: 12px sans-serif;
-    /*  pointer-events: none;	This line needs to be removed */
+    background-color: lightsteelblue;
+    padding: 5px;
+    border-radius: 5px;
+    visibility: hidden;
+    z-index: 10; /* Ensure it's above other elements */
 }
 .tooltip h3,h4 {
     text-align: left;
