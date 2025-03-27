@@ -54,4 +54,7 @@ function initMainPage(processedData) {
 	// console.log(allDataArray);
 	myDotChart = new DotChart("dotChart", processedData);
 	myBarChart = new BarChart("barChart", processedData);
+	myAreaChart = new AreaChart("areaChart", processedData);
+	percentCircleChart = new CircleChart("percentCircleChart", processedData, true)
+	avgCircleChart = new CircleChart("avgCircleChart", processedData, false)
 }

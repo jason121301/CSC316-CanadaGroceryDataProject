@@ -57,16 +57,19 @@ class DotChart {
         let vis = this;
 
         // Margin and SVG setup
-        vis.margin = { top: 50, right: 30, bottom: 50, left: 50 };
-        vis.width = 800 - vis.margin.left - vis.margin.right;
-        vis.height = 500 - vis.margin.top - vis.margin.bottom;
+        vis.margin = { top: 100 , right: 200, bottom: 100, left: 100 };
+        vis.width = 900 - vis.margin.left - vis.margin.right;
+        vis.height = 600 - vis.margin.top - vis.margin.bottom;
         
 
-        vis.svg = d3.select(`#${vis.parentElement}`).append("svg")
+        vis.svg = d3.select(`#${vis.parentElement}`)
+            .append("svg")
             .attr("width", vis.width + vis.margin.left + vis.margin.right)
             .attr("height", vis.height + vis.margin.top + vis.margin.bottom)
+            .style("display", "block")  // Makes sure the SVG behaves like a block element
+            .style("margin", "auto")   // Centers it if the parent container has `text-align: center`
             .append("g")
-            .attr("transform", `translate(${vis.margin.left},${vis.margin.top})`);
+            .attr("transform", `translate(${(vis.margin.left + vis.margin.right) / 2},${vis.margin.top})`); 
         // Add title for the graph
         vis.svg.append("text")
             .attr("x", vis.width / 2)  
@@ -115,16 +118,19 @@ class DotChart {
         vis.xAxis = vis.svg.append("g")
             .attr("transform", `translate(0,${vis.height})`)
             .call(d3.axisBottom(vis.x));
+        vis.xAxis.selectAll("text")
+            .style("font-size", "14px") 
+            .style("font-family", "Arial"); 
+        const percentFormat = d3.format(".0%"); 
 
-        // Define a format function to append "%" to the values
-        const percentFormat = d3.format(".0%");  // Adjust precision as needed
 
-        // Create the Y-axis with percentage formatting
         vis.yAxis = vis.svg.append("g")
             .call(d3.axisLeft(vis.y)
-                .tickFormat(percentFormat)  // Apply the percentage format
+                .tickFormat(percentFormat)  
             );
-        // Add a black line at 0% to split the graph
+        vis.yAxis   .selectAll("text")
+            .style("font-size", "14px") 
+            .style("font-family", "Arial"); 
         vis.svg.append("line")
             .attr("x1", 0)  
             .attr("x2", vis.width) 
@@ -132,6 +138,8 @@ class DotChart {
             .attr("y2", vis.y(0))  
             .attr("stroke", "red") 
             .attr("stroke-width", 1); 
+        
+
         vis.updateVis(processedData);
         }
 
@@ -201,5 +209,21 @@ class DotChart {
                     .style("top", "0px")
                     .html(""); // Clear tooltip content;
             });
+            const legend = vis.svg.selectAll(".legend")
+            .data([...new Set(processedData.map(d => d.groceryType))]) 
+            .join("g")
+            .attr("class", "legend")
+            .attr("transform", (d, i) => `translate(${vis.width + 30}, ${i * 20})`);
+        
+        legend.append("rect")
+            .attr("width", 15)
+            .attr("height", 15)
+            .attr("fill", d => colorScale(d)); 
+        
+        legend.append("text")
+            .attr("x", 20)
+            .attr("y", 12)
+            .text(d => d) 
+            .style("font-size", "14px");
     }
 }

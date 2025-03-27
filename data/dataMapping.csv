@@ -79,7 +79,7 @@ Products,Grocery Type,Ratio to 100 Gram,Unit
 "Apple juice, 2 litres",Beverages,0.05,No
 "Orange juice, 2 litres",Beverages,0.05,No
 "Roasted or ground coffee, 340 grams",Beverages,0.2941,No
-Tea (20 bags),Beverages,3.3333,No
+Tea (20 bags),Beverages,3.3333,Yes
 "Ketchup, 1 litre",Condiments,0.1,No
 "Vegetable oil, 3 litres",Condiments,0.03333,No
 "Canola oil, 3 litres",Condiments,0.0333,No

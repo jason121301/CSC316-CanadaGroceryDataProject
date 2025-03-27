@@ -19,3 +19,32 @@
     stroke-width: 3px;
     opacity: 0.7;
 }
+
+#yearRange {
+    width: 100%;    /* Make the slider take the full width */
+    height: 12px;   /* Increase the track height */
+    margin-top: 15px;
+}
+
+.noUi-target {
+    height: 12px !important;  /* Thicker track */
+}
+
+.noUi-connect {
+    height: 100%;  /* Ensure the connected range is the same height */
+}
+
+.noUi-handle {
+    width: 22px !important;  /* Increase handle size */
+    height: 22px !important;
+    top: -6px; /* Adjust positioning */
+    border-radius: 50%;  /* Make it circular */
+    background-color: #007bff; /* Customize color */
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.3);
+}
+
+.noUi-handle:before,
+.noUi-handle:after {
+    display: none; /* Remove extra handle decorations */
+}
+

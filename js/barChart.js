@@ -30,7 +30,7 @@ class BarChart {
 	initVis() {
 		let vis = this;
 
-		vis.margin = { top: 50, right: 30, bottom: 80, left: 60 };
+		vis.margin = { top: 50, right: 30, bottom: 150, left: 60 };
 		vis.width =
 			document.getElementById(vis.parentElement).clientWidth -
 			vis.margin.left -
@@ -55,7 +55,7 @@ class BarChart {
 			.attr("text-anchor", "middle")
 			.style("font-size", "18px")
 			.style("font-weight", "bold")
-			.text("Price Change Since 2020 (%)");
+			.text("Price Change Since 2020 to 2024 (%)");
 
 		vis.x = d3.scaleBand().range([0, vis.width]).padding(0.2);
 		vis.y = d3.scaleLinear().range([vis.height, 0]);
@@ -63,9 +63,22 @@ class BarChart {
 		vis.xAxis = vis.svg
 			.append("g")
 			.attr("transform", `translate(0,${vis.height})`);
+		
 		vis.yAxis = vis.svg.append("g");
 
+
 		vis.processedData = this.processData(this.data);
+		vis.tooltip = d3.select("body").append("div")
+		.attr("class", "tooltip")
+		.style("position", "absolute")
+		.style("background-color", "lightsteelblue")
+		.style("padding", "5px")
+		.style("border-radius", "5px")
+		.style("visibility", "hidden")
+		.style("top", "0px") 
+		.style("left", "0px")  
+		.style("z-index", "1000"); 
+
 		vis.updateVis();
 	}
 
@@ -84,7 +97,9 @@ class BarChart {
 			.attr("transform", "rotate(-45)")
 			.style("text-anchor", "end");
 		vis.yAxis.call(d3.axisLeft(vis.y).tickFormat((d) => d + "%"));
-
+		vis.yAxis   .selectAll("text")
+		.style("font-size", "14px") 
+		.style("font-family", "Arial"); 
 		vis.svg.selectAll(".bar").remove();
 
 		vis.svg
@@ -97,6 +112,37 @@ class BarChart {
 			.attr("y", (d) => (d.priceChange >= 0 ? vis.y(d.priceChange) : vis.y(0)))
 			.attr("height", (d) => Math.abs(vis.y(d.priceChange) - vis.y(0)))
 			.attr("width", vis.x.bandwidth())
-			.attr("fill", (d) => (d.priceChange >= 0 ? "steelblue" : "red"));
+			.attr("fill", (d) => (d.priceChange >= 0 ? "steelblue" : "red"))            
+			.on("mouseover", function(event, d) {
+                console.log(`Tooltip HTML: Price Increase: ${d.priceChange}%<br>Grocery Name: ${d.product}`);
+
+                d3.select(this)
+                    .attr("stroke-width", "2px")
+                    .attr("stroke", "black")
+                    .attr("fill", "rgba(173,222,255,0.62)");
+        
+                vis.tooltip
+                    .style("opacity", 1)
+                    .style("left", event.pageX + 20 + "px")
+                    .style("top", event.pageY + "px")
+                    .style("visibility", "visible")
+					.html(`
+					<div style="border: thin solid grey; border-radius: 5px; background: lightgrey; padding: 10px; font-size: 16px;">
+						<h4 style="font-size: 18px;">Grocery Name: ${d.product}</h4>
+						<h4 style="font-size: 18px;">Price Increase: ${d.priceChange.toFixed(2)}%</h4>
+					</div>
+						`);
+            })
+            .on("mouseout", function(event, d) {
+                d3.select(this)
+                    .attr("stroke-width", "0px")
+					.attr("fill", (d) => (d.priceChange >= 0 ? "steelblue" : "red"))           
+        
+                tooltip
+                    .style("opacity", 0)
+                    .style("left", "0px")
+                    .style("top", "0px")
+                    .html(""); // Clear tooltip content;
+            });
 	}
 }

@@ -3,86 +3,146 @@
 <head>
     <meta charset="utf-8">
     <title>Canada Grocery Data</title>
+    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+    <!-- Custom CSS -->
     <link rel="stylesheet" href="css/styles.css">
-
+    <!-- noUiSlider CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.css" integrity="sha512-...">
 </head>
 <body>
 
 <!-- WRAPPER -->
 <div class="container-fluid" style="height: 100vh; padding-top: 1vh">
     <div class="row">
-        <div class="col-10 offset-1" >
+        <div class="col-10 offset-1">
 
             <!-- HEADING -->
-            <div class="row d-flex al   ign-items-center" style="height: 10vh; padding: 0; background: #bcd4e6; border-bottom: thin solid grey">
-                <h1 style="text-align: center">Canadian Grocery Data</h1>
-            </div>  
-
-
-            <!-- MENU -->
-            <div class="row" style="height: 15vh; background: #ffffff; padding: 1vh">
-                <div class="col"
-                     style="height: 100%; border: thin solid lightgrey; border-radius: 5px; background: #d6e2e9">
-                    <div class="row" style="height: 100%">
-                        <div class="col-2 offset-5">
-                            <div class="row d-flex" style="height: 100%">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="row d-flex align-items-center justify-content-center text-center" style="height: 10vh; padding: 0; background: #bcd4e6; border-bottom: thin solid grey">
+                <h1>Canadian Grocery Inflation</h1>
             </div>
 
-            <!-- Visualizations -->
-            <div class="row"
-                 style="height: 73vh; padding-top: 0; padding-left: 1vh; padding-right: 1vh; padding-bottom: 1vh">
-                <div class="col">
-                    <div class="row"
+            <!-- MENU -->
 
-                        
-                         style="border: thin solid rgba(211,211,211,0.73); border-radius: 5px; background: rgba(214,226,233,0.42)">
-                         <div class="row">
-                            <div class="row justify-content-center">
-                                <div class="row justify-content-center">
-                                    <h1>How Grocery Prices Across the Board Have Been Increasing</h1>
-                                </div>
-                                <div id="areaChart" style="height: 71vh; width: 100%; background-image: url('/img/areaChartPlaceholder.png'); background-size: cover; background-position: center;"></div>
+            <!-- Visualizations -->
+            <div class="row" style="height: 73vh; padding-top: 0; padding-left: 1vh; padding-right: 1vh; padding-bottom: 1vh">
+                <div class="col">
+                    <div class="row" style="border: thin solid rgba(211,211,211,0.73); border-radius: 5px; background: rgba(214,226,233,0.42)">
+                        <!-- Area Chart -->
+                        <div class="row justify-content-center" style="padding-top: 50px;">
+                            <h2 class="text-center w-100">How Has the Price of Grocery Increased?</h2>
+                            <p style="width:50%" class="row text-center">Over time, the price of grocery has been steadily increasing. Sometimes, events occur that spike grocery price more than the years before it.
+                                Generally though, most regions increase their overall grocery price at the same rate.
+                            </p>
+                            <div class="row justify-content-center" style="padding-top:20px">
+                                <div id="areaChart" style="height: 71vh; width: 100%;"></div>
                             </div>
                         </div>
-                        
-                        <div class="row">
-                            <div class="row justify-content-center">
-                                <div class="row justify-content-center">
-                                    <h1>How Has Your Own Province Been Affected By Price Change</h1>
-                                </div>
-                                <div id="mapDiv" style="height: 71vh; width: 100%; background-image: url('/img/mapChartPlaceholder.png'); background-size: cover; background-position: center;"></div>
-                            </div>
-                        </div>
-                        
-                        <div class="row">
+
+                        <!-- Dot Chart -->
+                        <div class="row justify-content-center">
+                            <h2 class="text-center w-100">Events Sometimes Lead to Major Spikes</h2>
+                            <p style="width:50%" class="row text-center">Significant events such as global crises or policy changes can cause drastic fluctuations in grocery prices. For example, in 2019, the price of vegetables massively spiked. While in 2022, the price of baby food and all goods in general increased In this case, COVID severely increase the prices. But there does not seem to be any signs of a decrease in price even after a spike to normalize it</p>
                             <div class="row">
                                 <div id="dotChart" style="height: 71vh; width: 100%;"></div>
                             </div>
                         </div>
-                        
-                        <div class="row">
+
+                        <!-- Bar Chart -->
+                        <div class="row justify-content-center">
+                            <h2 class="text-center w-100">Deep Dive into Aftereffects of Major Events</h2>
+                            <p style="width:50%" class="row text-center">As we see below, even after prices spiked in 2019, there does not seem to be any kind of normalization of price decrease. All goods in general continue to inflate even if there were some exceptions that cause a decrease.</p>
                             <div class="row justify-content-center">
-                                <div class="row justify-content-center">
-                                    <h1>Deep Dive into Aftereffects of Major Events</h1>
-                                </div>
                                 <div id="barChart" style="height: 71vh; width: 100%;"></div>
                             </div>
                         </div>
-                        
-                        <div class="row">
-                            <div class="row justify-content-center">
-                                <div class="row justify-content-center">
-                                    <h1>What Grocery tend to change the least? Find out here</h1>
+
+                        <!-- Circle Charts and Category Selector -->
+                        <div class="row justify-content-center text-center">
+                            <h2>What Grocery Tends to Change the Least? Find Out Here</h2>
+                            <p>Discover which grocery categories show the most stability in pricing over time.</p>
+                            <div class="col-12 d-flex justify-content-center">
+                                <div class="row">
+                                    <!-- Left column with charts -->
+                                    <div class="col-md-8">
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div id="percentCircleChart"></div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-12">
+                                                <div id="avgCircleChart"></div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Right column with category selector -->
+                                    <div class="col-md-4">
+                                        <div class="row" style="padding-left: 50px; padding-top: 100px;">
+                                            <div id="category-selector">
+                                                <label>Select Categories:</label>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="selectAll" value="All" checked>
+                                                    <label class="form-check-label" for="selectAll">All</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="animalProduct" value="Animal Product" checked>
+                                                    <label class="form-check-label" for="animalProduct">Animal Product</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="dairy" value="Dairy" checked>
+                                                    <label class="form-check-label" for="dairy">Dairy</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="fruits" value="Fruits" checked>
+                                                    <label class="form-check-label" for="fruits">Fruits</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="vegetables" value="Vegetables" checked>
+                                                    <label class="form-check-label" for="vegetables">Vegetables</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="cannedFrozen" value="Canned/Frozen Products" checked>
+                                                    <label class="form-check-label" for="cannedFrozen">Canned/Frozen Products</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="grains" value="Grains" checked>
+                                                    <label class="form-check-label" for="grains">Grains</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="beverages" value="Beverages" checked>
+                                                    <label class="form-check-label" for="beverages">Beverages</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="condiments" value="Condiments" checked>
+                                                    <label class="form-check-label" for="condiments">Condiments</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="babyFood" value="Baby Food" checked>
+                                                    <label class="form-check-label" for="babyFood">Baby Food</label>
+                                                </div>
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" id="nonFood" value="Non-Food" checked>
+                                                    <label class="form-check-label" for="nonFood">Non-Food</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row justify-content-center mt-4">
+                                            <div class="col-md-8">
+                                                <label for="yearRange">Select Year Range:</label>
+                                                <div id="yearRange"></div>
+                                                <div class="d-flex justify-content-between">
+                                                    <span id="minYear">2017</span>
+                                                    <span id="maxYear">2023</span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div id="pieDivRight" style="height: 71vh; width: 100%; background-image: url('/img/circleChartPlaceholder.png'); background-size: cover; background-position: center;"></div>
                             </div>
                         </div>
-
+                    </div>
                 </div>
             </div>
         </div>
@@ -90,26 +150,85 @@
 </div>
 
 
-<!-- - - - - - - - - - - - >
-<    Load JS libraries     >
-<- - - - - - - - - - - - -->
-
-<!-- BOOTSTRAP -->
+<!-- Load JS libraries -->
+<!-- Bootstrap JS -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
-
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- d3 -->
 <script src="https://d3js.org/d3.v7.min.js"></script>
-
 <script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
 <script src="https://d3js.org/topojson.v2.min.js"></script>
 <script src="https://d3js.org/d3-geo.v1.min.js"></script>
 
 <!-- OWN JS -->
+<script src="js/areaChart.js"></script>
 <script src="js/barChart.js"></script>
 <script src="js/dotChart.js"></script>
+<script src="js/circleChart.js"></script>
 <script src="js/mapVis.js"></script>
 <script src="js/pieChart.js"></script>
 <script src="js/main.js"></script>
+
+<!-- noUiSlider JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/noUiSlider/15.6.1/nouislider.min.js" integrity="sha512-..."></script>
+
+<!-- Add JavaScript for "Select All" functionality -->
+<script>
+    $(document).ready(function() {
+        // "Select All" functionality
+        $('#selectAll').change(function() {
+            const isChecked = $(this).is(':checked');
+            $('.form-check-input').prop('checked', isChecked);
+        });
+
+        // Uncheck "Select All" if any individual checkbox is unchecked
+        $('.form-check-input').not('#selectAll').change(function() {
+            if (!$(this).is(':checked')) {
+                $('#selectAll').prop('checked', false);
+            }
+        });
+    });
+</script>
+
+<!-- Initialize noUiSlider -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const yearRangeSlider = document.getElementById('yearRange');
+        const minYear = 2017; // Minimum year
+        const maxYear = 2023; // Maximum year
+
+        noUiSlider.create(yearRangeSlider, {
+            start: [minYear, maxYear], // Initial range
+            connect: true, // Add a connecting bar between the handles
+            range: {
+                min: minYear,
+                max: maxYear
+            },
+            step: 1, // Step size (1 year)
+            format: {
+                to: function(value) {
+                    return Math.round(value); // Display as integer
+                },
+                from: function(value) {
+                    return Math.round(value); // Parse as integer
+                }
+            }
+        });
+
+        // Add event listener for the range slider
+        yearRangeSlider.noUiSlider.on('update', function(values) {
+            const [minSelectedYear, maxSelectedYear] = values.map(Number); // Get selected range
+            document.getElementById('minYear').textContent = minSelectedYear; // Update min year display
+            document.getElementById('maxYear').textContent = maxSelectedYear; // Update max year display
+
+            // Call a function to filter data and update the visualization
+            if (window.vis) {
+                vis.filterDataByYearRange(minSelectedYear, maxSelectedYear);
+            }
+        });
+    });
+</script>
 </body>
 </html>
