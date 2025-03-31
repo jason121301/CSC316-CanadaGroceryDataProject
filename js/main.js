@@ -3,7 +3,7 @@
  * * * * * * * * * * * * * */
 
 // init global variables, switches, helper functions
-let myPieChart, myMapVis, myDotChart;
+let myPieChart, myMapVis, myDotChart, lineChart;
 
 let processedData;
 
@@ -57,4 +57,11 @@ function initMainPage(processedData) {
 	myAreaChart = new AreaChart("areaChart", processedData);
 	percentCircleChart = new CircleChart("percentCircleChart", processedData, true)
 	avgCircleChart = new CircleChart("avgCircleChart", processedData, false)
+	lineChart = new LineChart("lineChart", processedData);
+
+	document.getElementById("interval-selector").addEventListener("change", function() {
+		lineChart.selectedInterval = this.value;
+		lineChart.updateVis();
+	});
+
 }

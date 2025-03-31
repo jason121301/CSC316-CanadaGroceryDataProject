@@ -142,6 +142,29 @@
                                 </div>
                             </div>
                         </div>
+                            <!-- Line Chart Section -->
+                            <div class="row justify-content-center">
+                                <h2 class="text-center w-100">How are the price changes over different time intervals</h2>
+                                <p style="width:50%" class="row text-center">Notice something? over long periods of time, the rate of change remains relatively stable. While it has been slowly increasing, it still more or less change at a relatively equal rate. On the other hand, when the time intervals are decreased to the change within 1 year or 2 years, that is where you feel like grocery prices could just suddenly jump up and change a lot in terms of price.</p>
+                                
+                                <div class="row justify-content-center mb-3">
+                                    <div class="col-md-6 text-center">
+                                        <label for="interval-selector" class="form-label">Select Time Interval:</label>
+                                        <select id="interval-selector" class="form-select" style="width: 200px; margin: 0 auto;">
+                                            <option value="8-year" selected>8 Years</option>
+                                            <option value="4-year">4 Years</option>
+                                            <option value="2-year">2 Years</option>
+                                            <option value="1-year">1 Year</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div class="row justify-content-center" style="height: 60vh;">
+                                    <div class="col-md-10">
+                                        <div id="lineChart" style="height: 100%; width: 100%; margin: 0 auto;"></div>
+                                    </div>
+                                </div>
+                            </div>
                     </div>
                 </div>
             </div>
@@ -167,6 +190,7 @@
 <script src="js/barChart.js"></script>
 <script src="js/dotChart.js"></script>
 <script src="js/circleChart.js"></script>
+<script src="js/lineChart.js"></script>
 <script src="js/mapVis.js"></script>
 <script src="js/pieChart.js"></script>
 <script src="js/main.js"></script>
